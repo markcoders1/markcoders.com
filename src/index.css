@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* ===== Custom Variables ===== */
+:root {
+  --font-switzer: 'Switzer', system-ui, -apple-system, sans-serif;
+  --dark-950: #030712;
+  --dark-900: #0a0e1a;
+  --dark-800: #0f1424;
+  --dark-700: #151b30;
+  --dark-600: #1c2440;
+  --blue-primary: #1a7af8;
+  --blue-glow: #1565d8;
+  --blue-deep: #0a3d8f;
+}
+
+/* ===== Global Styles ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-switzer);
+  background-color: var(--dark-950);
+  color: #ffffff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-600);
+  border-radius: 3px;
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: rgba(26, 122, 248, 0.3);
+  color: #ffffff;
+}
