@@ -1,0 +1,119 @@
+.markcoders-wrap {
+  --mouse-x: -9999px;
+  --mouse-y: -9999px;
+  --reveal-size: 220px;
+
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000000;
+  cursor: crosshair;
+  z-index: 1;
+}
+
+.markcoders-wrap--footer {
+  min-height: clamp(120px, 22vw, 280px);
+  padding: 0;
+  background: transparent;
+}
+
+.markcoders-stack {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-inline: 0;
+  box-sizing: border-box;
+  pointer-events: none;
+  user-select: none;
+}
+
+.markcoders-brand {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: center;
+  font-family: 'Switzer', system-ui, sans-serif;
+  font-size: clamp(2.4rem, 14vw, 13.5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.16);
+  transform: none;
+}
+
+.markcoders-reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: inherit;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    circle var(--reveal-size) at var(--mouse-x) var(--mouse-y),
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.6) 66%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--reveal-size) at var(--mouse-x) var(--mouse-y),
+    #000 0%,
+    #000 40%,
+    rgba(0, 0, 0, 0.6) 66%,
+    transparent 100%
+  );
+}
+
+.markcoders-reveal .markcoders-stack {
+  width: 100%;
+  max-width: 100%;
+}
+
+.markcoders-fill--blue {
+  color: #009cff;
+  -webkit-text-stroke: 1px #009cff;
+  text-shadow:
+    0 0 12px rgba(0, 156, 255, 0.5),
+    0 0 32px rgba(0, 156, 255, 0.25);
+}
+
+.markcoders-reveal--blue {
+  --reveal-size: 220px;
+}
+
+@media (max-width: 768px) {
+  .markcoders-wrap--footer {
+    min-height: clamp(90px, 28vw, 160px);
+  }
+
+  .markcoders-brand {
+    font-size: clamp(2rem, 13.5vw, 5rem);
+    letter-spacing: -0.05em;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.18);
+  }
+
+  .markcoders-reveal--blue {
+    --reveal-size: 140px;
+  }
+}
+
+@media (max-width: 360px) {
+  .markcoders-brand {
+    font-size: clamp(1.75rem, 12.5vw, 2.6rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .markcoders-reveal {
+    transition: none;
+  }
+}
