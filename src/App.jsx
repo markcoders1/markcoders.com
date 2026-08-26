@@ -1,43 +1,40 @@
-import { useRef } from 'react';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import WorkGrid from './components/WorkGrid';
-import AboutAndVideo from './components/AboutAndVideo';
-import WhatWeDo from './components/WhatWeDo';
-import ToolsSection from './components/ToolsSection';
-import TeamSection from './components/TeamSection';
-import WorkAndPlaySection from './components/WorkAndPlaySection';
-import SplashCursor from './components/SplashCursor';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import MLoader from './components/MLoader'
 
-function App() {
-  const heroImageRef = useRef(null);
+const Home = lazy(() => import('./pages/Home'))
+
+const App = () => {
+  const [loading, setLoading] = useState(true)
+
+  const handleLoaderComplete = useCallback(() => {
+    setLoading(false)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = loading ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [loading])
 
   return (
-    <div className="relative bg-[#030712] min-h-screen text-white">
-      <SplashCursor
-        DENSITY_DISSIPATION={3.5}
-        VELOCITY_DISSIPATION={2}
-        PRESSURE={0.1}
-        CURL={3}
-        SPLAT_RADIUS={0.2}
-        SPLAT_FORCE={6000}
-        COLOR_UPDATE_SPEED={12}
-        SHADING
-        RAINBOW_MODE={false}
-        COLOR="#005ef7"
-      />
-      <Navbar />
-      <main>
-        <HeroSection heroImageRef={heroImageRef} />
-        <WorkGrid heroImageRef={heroImageRef} />
-        <AboutAndVideo />
-        <WhatWeDo />
-        <ToolsSection />
-        <TeamSection />
-        <WorkAndPlaySection />
-      </main>
-    </div>
-  );
+    <BrowserRouter>
+      {loading && <MLoader duration={2.8} onComplete={handleLoaderComplete} />}
+      <Suspense fallback={null}>
+        <div
+          aria-hidden={loading}
+          style={{
+            opacity: loading ? 0 : 1,
+            transition: 'opacity 0.45s ease',
+            pointerEvents: loading ? 'none' : 'auto',
+          }}
+        >
+          <Home />
+        </div>
+      </Suspense>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
