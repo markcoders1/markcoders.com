@@ -19,7 +19,7 @@ const App = () => {
   }, [loading])
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Markcoders">
       {loading && <MLoader duration={2.8} onComplete={handleLoaderComplete} />}
       <Suspense fallback={null}>
         <div
