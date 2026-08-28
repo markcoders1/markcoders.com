@@ -1,5 +1,14 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
+
+const LOGO_SRC = `${import.meta.env.BASE_URL}logo.png`;
+
+const NAV_LINKS = [
+  { label: 'Home', to: '/' },
+  { label: 'About Us', to: '/#about-us' },
+  { label: 'Services', to: '/#services' },
+];
 
 const Navbar = () => {
   const navRef = useRef(null);
@@ -51,6 +60,72 @@ const Navbar = () => {
     return () => ctx.revert();
   }, []);
 
+  // Hide on scroll down, show on any scroll up
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    let lastScrollY = window.scrollY;
+    let isHidden = false;
+
+    const showNav = () => {
+      if (!isHidden) return;
+      isHidden = false;
+      gsap.to(nav, {
+        y: 0,
+        duration: 0.35,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+    };
+
+    const hideNav = () => {
+      if (isHidden) return;
+      isHidden = true;
+
+      // Close mobile menu when nav hides
+      const menu = mobileMenuRef.current;
+      const hamburger = hamburgerRef.current;
+      if (menu && !menu.classList.contains('max-h-0')) {
+        menu.classList.remove('max-h-[400px]', 'opacity-100');
+        menu.classList.add('max-h-0', 'opacity-0');
+        hamburger?.classList.remove('active');
+      }
+
+      gsap.to(nav, {
+        y: '-100%',
+        duration: 0.35,
+        ease: 'power2.in',
+        overwrite: true,
+      });
+    };
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 10) {
+        showNav();
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (currentScrollY > lastScrollY && currentScrollY > 72) {
+        hideNav();
+      } else if (currentScrollY < lastScrollY) {
+        showNav();
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      gsap.set(nav, { clearProps: 'y' });
+    };
+  }, []);
+
   const toggleMobileMenu = () => {
     const menu = mobileMenuRef.current;
     const hamburger = hamburgerRef.current;
@@ -69,7 +144,7 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 lg:px-16 py-5"
+      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 lg:px-16 py-5 will-change-transform"
       style={{
         background:
           'linear-gradient(180deg, rgba(3,7,18,0.95) 0%, rgba(3,7,18,0.7) 60%, transparent 100%)',
@@ -79,56 +154,38 @@ const Navbar = () => {
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div ref={logoRef} className="flex items-center gap-3 cursor-pointer select-none">
-          <svg
-            width="32"
-            height="30"
-            viewBox="0 0 38 34"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-auto"
+        <Link to="/" ref={logoRef} className="flex items-center gap-2.5 sm:gap-3 cursor-pointer select-none no-underline">
+          <img
+            src={LOGO_SRC}
+            alt=""
+            className="h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0"
+            decoding="async"
+            draggable={false}
+          />
+          <span
+            className="text-[1.35rem] sm:text-[1.65rem] font-extrabold text-white uppercase leading-none tracking-[-0.04em]"
+            style={{ fontFamily: 'Switzer, sans-serif' }}
           >
-            {/* Stylized M / Code Bracket Logo */}
-            <path
-              d="M10 8L2 17L10 26"
-              stroke="#25A9E0"
-              strokeWidth="4.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M28 8L36 17L28 26"
-              stroke="#25A9E0"
-              strokeWidth="4.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M15 28L23 6"
-              stroke="#FFFFFF"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span className="text-2xl font-bold tracking-wider text-white uppercase" style={{ fontFamily: 'Switzer, sans-serif' }}>
-            MARKCODERS<span className="text-[#25A9E0]">/&gt;</span>
+            MARKCODERS
+            <span className="text-white">/</span>
+            <span className="text-[#25A9E0]">&gt;</span>
           </span>
-        </div>
+        </Link>
 
         {/* Desktop Nav Links */}
         <div
           ref={linksRef}
           className="hidden md:flex items-center gap-8 lg:gap-12"
         >
-          {['Home', 'About Us', 'Services'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="text-[24px] text-gray-300 hover:text-white transition-colors duration-300 relative group font-medium tracking-wide"
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="text-[24px] text-gray-300 hover:text-white transition-colors duration-300 relative group font-medium tracking-wide no-underline"
             >
-              {item}
+              {item.label}
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-primary group-hover:w-full transition-all duration-300" />
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -164,15 +221,15 @@ const Navbar = () => {
         className="md:hidden max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out"
       >
         <div className="pt-6 pb-4 flex flex-col gap-4">
-          {['Home', 'About Us', 'Services'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="text-gray-300 hover:text-white transition-colors duration-300 text-base py-2 border-b border-white/5"
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="text-gray-300 hover:text-white transition-colors duration-300 text-base py-2 border-b border-white/5 no-underline"
               onClick={toggleMobileMenu}
             >
-              {item}
-            </a>
+              {item.label}
+            </Link>
           ))}
           <button
             className="mt-2 px-6 py-3 rounded-full text-sm font-semibold text-white w-full cursor-pointer"
