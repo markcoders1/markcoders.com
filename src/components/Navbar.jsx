@@ -192,7 +192,7 @@ const Navbar = () => {
         {/* CTA Button */}
         <div ref={btnRef} className="hidden md:block">
           <button
-            className="px-6 py-2.5 rounded-[15px] text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
+            className="px-7 py-3 rounded-[15px] text-lg font-normal text-white transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
             style={{
               background: '#25A9E0',
               boxShadow: '0 4px 20px rgba(26, 122, 248, 0.3)',

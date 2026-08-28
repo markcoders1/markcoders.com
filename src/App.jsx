@@ -2,11 +2,9 @@ import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import MLoader from './components/MLoader'
+import TextLoader from './components/TextLoader'
 
 gsap.registerPlugin(ScrollTrigger)
-import { BrowserRouter } from 'react-router-dom'
-import TextLoader from './components/TextLoader'
 
 const Home = lazy(() => import('./pages/Home'))
 const Projects = lazy(() => import('./pages/Projects'))
@@ -48,29 +46,25 @@ const App = () => {
   return (
     <BrowserRouter basename="/Markcoders">
       <ScrollRefresh />
-      {loading && <MLoader duration={2.8} onComplete={handleLoaderComplete} />}
-      <BrowserRouter>
-        {loading && <TextLoader duration={3} onComplete={handleLoaderComplete} />}
-        <Suspense fallback={null}>
-          <div
-            aria-hidden={loading}
-            style={{
-              opacity: loading ? 0 : 1,
-              transition: 'opacity 0.5s ease',
-              pointerEvents: loading ? 'none' : 'auto',
-            }}
-          >
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/project" element={<Projects />} />
-            </Routes>
-          </div>
-        </Suspense>
-      </BrowserRouter>
-      )
+      {loading && <TextLoader duration={3} onComplete={handleLoaderComplete} />}
+      <Suspense fallback={null}>
+        <div
+          aria-hidden={loading}
+          style={{
+            opacity: loading ? 0 : 1,
+            transition: 'opacity 0.5s ease',
+            pointerEvents: loading ? 'none' : 'auto',
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/project" element={<Projects />} />
+          </Routes>
+        </div>
+      </Suspense>
+    </BrowserRouter>
+  )
 }
 
-      export default App
-
-
+export default App

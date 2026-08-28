@@ -14,126 +14,86 @@ const AboutAndVideo = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Opacity scroll animation for the main heading
+      // 1. Heading Char Reveal
       const headingElement = headingRef.current;
       if (headingElement) {
-        const text = (headingElement.textContent || '').trim();
+        const text = "We craft design that turns ambitious ideas into products people trust.";
         headingElement.innerHTML = '';
 
-        // Split heading into words, then characters for opacity reveal
+        // Spacer for first line indent
+        const spacer = document.createElement('span');
+        spacer.className = 'inline-block w-12 sm:w-20 md:w-28 lg:w-36';
+        spacer.setAttribute('aria-hidden', 'true');
+        headingElement.appendChild(spacer);
+
         const words = text.split(/\s+/).filter(Boolean);
-        words.forEach((word, idx) => {
+        words.forEach((word) => {
           const wordSpan = document.createElement('span');
-          wordSpan.style.display = 'inline-block';
-          wordSpan.style.whiteSpace = 'nowrap';
+          wordSpan.className = 'inline-block mr-[0.28em] whitespace-nowrap';
 
           for (let char of word) {
             const charSpan = document.createElement('span');
             charSpan.textContent = char;
-            charSpan.className = 'heading-char-reveal';
+            charSpan.className = 'about-heading-char';
             charSpan.style.opacity = '0.15';
-            charSpan.style.transition = 'opacity 0.15s ease';
+            charSpan.style.color = '#FFFFFF';
             wordSpan.appendChild(charSpan);
           }
           headingElement.appendChild(wordSpan);
-
-          // Add a real space between words
-          if (idx < words.length - 1) {
-            const space = document.createTextNode(' ');
-            headingElement.appendChild(space);
-          }
         });
 
-        const headingChars = headingElement.querySelectorAll('.heading-char-reveal');
-
-        gsap.to(headingChars, {
+        const chars = headingElement.querySelectorAll('.about-heading-char');
+        gsap.to(chars, {
           opacity: 1,
           stagger: 0.02,
           ease: 'none',
           scrollTrigger: {
             trigger: headingElement,
-            start: 'top 90%',
-            end: 'bottom 40%',
-            scrub: true,
+            start: 'top 85%',
+            end: 'bottom 45%',
+            scrub: 0.5,
           },
         });
       }
 
-      // Smooth scroll reveal for the "About us" paragraph text
+      // 2. About us paragraph reveal
       const paraElement = paragraphRef.current;
       if (paraElement) {
-        // Get all child nodes (spans and text nodes)
-        const childNodes = Array.from(paraElement.childNodes);
-        const fullText = paraElement.textContent || '';
+        paraElement.innerHTML = '';
 
-        // Clear and rebuild with character spans, preserving bold markup
-        const fragment = document.createDocumentFragment();
+        // Spacer for first line indent
+        const spacer = document.createElement('span');
+        spacer.className = 'inline-block w-8 sm:w-12 md:w-16';
+        spacer.setAttribute('aria-hidden', 'true');
+        paraElement.appendChild(spacer);
 
-        childNodes.forEach((node) => {
-          if (node.nodeType === Node.TEXT_NODE) {
-            // Plain text node — split into words and chars
-            const words = (node.textContent || '').split(/\s+/).filter(Boolean);
-            words.forEach((word, idx) => {
-              const wordSpan = document.createElement('span');
-              wordSpan.style.display = 'inline-block';
-              wordSpan.style.whiteSpace = 'nowrap';
+        const segments = [
+          { text: 'About us. ', isBold: true },
+          { text: 'Markcoders is a research-driven design studio that treats every project like its own product. We go deep into your market and your users before designing a single screen. ', isBold: false },
+          { text: "The result: digital experiences that don't just look sharp, they perform.", isBold: true },
+        ];
 
-              for (let char of word) {
-                const charSpan = document.createElement('span');
-                charSpan.textContent = char;
-                charSpan.className = 'char-opacity-reveal';
-                charSpan.style.opacity = '0.25';
-                charSpan.style.transition = 'opacity 0.2s ease';
-                wordSpan.appendChild(charSpan);
-              }
-              fragment.appendChild(wordSpan);
-              // Add real space after each word
-              if (idx < words.length - 1) {
-                fragment.appendChild(document.createTextNode(' '));
-              }
-            });
-            // Add trailing space after text node to separate from next node
-            fragment.appendChild(document.createTextNode(' '));
-          } else if (node.nodeType === Node.ELEMENT_NODE) {
-            // Element node (like <strong>) — split its text into chars but wrap in same tag
-            const tagName = node.tagName;
-            const text = node.textContent || '';
-            const words = text.split(/\s+/).filter(Boolean);
-            words.forEach((word, idx) => {
-              const wordSpan = document.createElement('span');
-              wordSpan.style.display = 'inline-block';
-              wordSpan.style.whiteSpace = 'nowrap';
+        segments.forEach((seg) => {
+          const segWords = seg.text.split(/\s+/).filter(Boolean);
+          segWords.forEach((word) => {
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'inline-block mr-[0.28em] whitespace-nowrap';
 
-              for (let char of word) {
-                const charSpan = document.createElement('span');
-                charSpan.textContent = char;
-                charSpan.className = 'char-opacity-reveal';
-                charSpan.style.opacity = '0.25';
-                charSpan.style.transition = 'opacity 0.2s ease';
-                // Inherit bold styling
-                if (tagName === 'STRONG' || tagName === 'B') {
-                  charSpan.style.fontWeight = '700';
-                  charSpan.style.color = '#ffffff';
-                }
-                wordSpan.appendChild(charSpan);
-              }
-              fragment.appendChild(wordSpan);
-              // Add real space after each word
-              if (idx < words.length - 1) {
-                fragment.appendChild(document.createTextNode(' '));
-              }
-            });
-            // Add trailing space after element node to separate from next node
-            fragment.appendChild(document.createTextNode(' '));
-          }
+            for (let char of word) {
+              const charSpan = document.createElement('span');
+              charSpan.textContent = char;
+              charSpan.className = 'about-para-char';
+              charSpan.style.opacity = seg.isBold ? '0.35' : '0.2';
+              charSpan.style.fontWeight = seg.isBold ? '700' : '500';
+              charSpan.style.color = '#FFFFFF';
+              wordSpan.appendChild(charSpan);
+            }
+            paraElement.appendChild(wordSpan);
+          });
         });
 
-        paraElement.innerHTML = '';
-        paraElement.appendChild(fragment);
-
-        const chars = paraElement.querySelectorAll('.char-opacity-reveal');
-
-        gsap.to(chars, {
+        const paraChars = paraElement.querySelectorAll('.about-para-char');
+        gsap.to(paraChars, {
           opacity: 1,
           stagger: 0.01,
           ease: 'none',
@@ -141,12 +101,12 @@ const AboutAndVideo = () => {
             trigger: paraElement,
             start: 'top 85%',
             end: 'bottom 50%',
-            scrub: true,
+            scrub: 0.5,
           },
         });
       }
 
-      // Video Box Scroll Animation (Expanding to full width)
+      // 3. Video Box Scroll Animation (Expanding to full width)
       if (videoWrapperRef.current) {
         gsap.fromTo(
           videoWrapperRef.current,
@@ -161,7 +121,7 @@ const AboutAndVideo = () => {
             scrollTrigger: {
               trigger: videoWrapperRef.current,
               start: 'top 95%',
-              end: 'top 15%',
+              end: 'top 20%',
               scrub: true,
             },
           }
@@ -173,57 +133,123 @@ const AboutAndVideo = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative z-10 w-full bg-transparent overflow-hidden pt-28 pb-4">
-      {/* (All Work) Heading & Text block */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 mb-20">
-        {/* Centered (All Work) label */}
-        <h2 className="text-[#25A9E0] text-[40px] md:text-[91px] font-medium mb-20 tracking-tight font-sans text-center">
+    <div
+      ref={containerRef}
+      id="about-us"
+      className="relative z-10 w-full bg-transparent overflow-hidden pt-20 md:pt-32 pb-8"
+    >
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 mb-24 md:mb-32">
+        {/* (All Work) Label */}
+        <h2
+          className="text-[#25A9E0] text-center mb-16 md:mb-24"
+          style={{
+            fontFamily: 'Switzer, sans-serif',
+            fontWeight: 500,
+            fontSize: 'clamp(42px, 6.5vw, 91px)',
+            lineHeight: '1.13',
+            letterSpacing: '-3.4px',
+          }}
+        >
           (All Work)
         </h2>
 
-        {/* Large centered heading with opacity scroll animation */}
+        {/* Large Statement Heading */}
         <h3
           ref={headingRef}
-          className="text-white text-[40px] md:text-[64px] lg:text-[91px] font-normal leading-[1.08] tracking-tight  mx-auto mb-24 font-sans"
+          className="text-white text-left max-w-[1300px] mb-20 md:mb-28"
+          style={{
+            fontFamily: 'Switzer, sans-serif',
+            fontWeight: 500,
+            fontSize: 'clamp(36px, 5.8vw, 84px)',
+            lineHeight: '1.15',
+            letterSpacing: '-0.035em',
+          }}
         >
+          <span className="inline-block w-12 sm:w-20 md:w-28 lg:w-36" aria-hidden="true" />
           We craft design that turns ambitious ideas into products people trust.
         </h3>
 
-        {/* About description footer block */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 mt-16 pt-10 border-t border-white/10 font-sans">
-          {/* Left column: About text + button */}
-          <div className="flex-1 max-w-[680px]">
-            <div ref={paragraphRef} className="text-[17px] md:text-[26px] text-[#6b7280] font-normal leading-[1.7] tracking-normal">
-              <strong className="text-white font-bold">About us.</strong> Markcoders is a research-driven design studio that treats every project like its own product. We go deep into your market  and your users before designing a single screen. <strong className="text-white font-bold">The result: digital experiences that don't just look sharp, they perform.</strong>
+        {/* Bottom Split Description Grid */}
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16">
+          {/* Left Column: About Paragraph & CTA Button */}
+          <div className="w-full lg:max-w-[740px] flex flex-col gap-10">
+            <div
+              ref={paragraphRef}
+              className="text-left text-[#9ca3af]"
+              style={{
+                fontFamily: 'Switzer, sans-serif',
+                fontWeight: 500,
+                fontSize: 'clamp(18px, 1.85vw, 26px)',
+                lineHeight: '1.45',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              <span className="inline-block w-8 sm:w-12 md:w-16" aria-hidden="true" />
+              <strong className="text-white font-bold">About us.</strong> Markcoders is a research-driven design studio that treats every project like its own product. We go deep into your market and your users before designing a single screen.{' '}
+              <strong className="text-white font-bold">
+                The result: digital experiences that don't just look sharp, they perform.
+              </strong>
             </div>
 
-            <div className="mt-10">
+            {/* Figma Pixel-Perfect Button */}
+            <div>
               <button
-                className="px-7 py-3.5 rounded-[12px] text-[18px] font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-lg cursor-pointer flex items-center gap-2.5"
+                className="inline-flex items-center justify-center gap-2.5 text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-xl cursor-pointer"
                 style={{
+                  width: '223.65px',
+                  height: '52.88px',
+                  borderRadius: '15px',
                   background: '#25A9E0',
-                  boxShadow: '0 4px 20px rgba(37, 169, 224, 0.25)',
+                  boxShadow: '0 4px 20px rgba(37, 169, 224, 0.3)',
+                  fontFamily: 'Switzer, sans-serif',
+                  fontWeight: 500,
+                  fontSize: '18px',
+                  lineHeight: '30px',
+                  letterSpacing: '-0.5px',
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
-                  <path d="M3.33337 12.6667L12.6667 3.33337M12.6667 3.33337H5.33337M12.6667 3.33337V10.6667" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                {/* Arrow Icon 19.08px x 19.08px */}
+                <svg
+                  width="19.08"
+                  height="19.08"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                >
+                  <path
+                    d="M7 17L17 7M17 7H7M17 7V17"
+                    stroke="white"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
-                Explore Our Process
+                <span>Explore Our Process</span>
               </button>
             </div>
           </div>
 
-          {/* Right column: Service description */}
-          <div className="lg:max-w-[300px] lg:ml-auto self-start">
-            <p className="text-[15px] md:text-[20px] text-[#9ca3af] leading-[1.7] font-normal">
+          {/* Right Column: Secondary Description */}
+          <div className="w-full lg:max-w-[340px] lg:pt-2">
+            <p
+              className="text-[#9ca3af] text-left"
+              style={{
+                fontFamily: 'Switzer, sans-serif',
+                fontWeight: 500,
+                fontSize: 'clamp(16px, 1.45vw, 20px)',
+                lineHeight: '1.4',
+                letterSpacing: '-0.02em',
+              }}
+            >
               We design intuitive interfaces for web and mobile products, from first wireframe to development-ready files.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Full-width Expanding Video Image section */}
-      <div className="w-full flex justify-center items-center py-10">
+      {/* Full-width Expanding Video/Image Showcase on scroll */}
+      <div className="w-full flex justify-center items-center py-6">
         <div
           ref={videoWrapperRef}
           className="relative h-[55vh] md:h-[75vh] overflow-hidden mx-auto"
@@ -235,7 +261,7 @@ const AboutAndVideo = () => {
             alt="Showcase Video Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/5 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/10 pointer-events-none" />
         </div>
       </div>
     </div>

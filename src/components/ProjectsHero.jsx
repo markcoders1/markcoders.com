@@ -1,4 +1,3 @@
-import { ArrowUpRight } from 'lucide-react';
 import PageHero from './landing/PageHero';
 import { FEATURED_PROJECT } from '../data/projects';
 
@@ -43,11 +42,22 @@ const OurWorkCard = ({ imageRef, tagline, image, title }) => (
             boxShadow: '0 2px 10px rgba(26, 122, 248, 0.3)',
           }}
         >
-          <ArrowUpRight
-            size={16}
-            strokeWidth={2}
-            className="text-white transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          >
+            <path
+              d="M4 12L12 4M12 4H5.33M12 4V10.67"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
       </div>
     </div>

@@ -24,13 +24,13 @@ const AnimatedHeroTitle = forwardRef(function AnimatedHeroTitle(
       {text.split('').map((char, i) => (
         <span
           key={`${char}-${i}`}
-          className="inline-block font-bold cursor-default transition-[font-weight] duration-[350ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-          style={{ fontWeight: 700 }}
+          className="inline-block font-semibold cursor-default transition-[font-weight] duration-[350ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          style={{ fontWeight: 600 }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.fontWeight = '900';
+            e.currentTarget.style.fontWeight = '800';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.fontWeight = '700';
+            e.currentTarget.style.fontWeight = '600';
           }}
         >
           {char === ' ' ? '\u00A0' : char}
