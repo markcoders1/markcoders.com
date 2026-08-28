@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MarkcodersText from "./MarkcodersText";
+
 import "../App.css";
+import "./Footer.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,7 +76,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={rootRef} className="footer">
+    <footer ref={rootRef} className="footer footer-bg">
       <div className="footer__inner mx-auto w-full max-w-[1440px] px-6 pt-16 sm:px-10 sm:pt-20 lg:px-20 lg:pt-24">
         <div className="footer__top flex flex-col gap-14 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
           <div className="footer__intro max-w-md">
@@ -154,7 +156,7 @@ const Footer = () => {
 
       </div>
 
-      <div className="js-brand footer__brand-wrap mt-16 sm:mt-20 lg:mt-24 pb-6 sm:pb-8">
+      <div className="js-brand footer__brand-wrap">
         <MarkcodersText />
       </div>
     </footer>

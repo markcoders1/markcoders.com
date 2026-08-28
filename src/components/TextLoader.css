@@ -1,0 +1,112 @@
+.text-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.text-loader-overlay.is-exiting {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.text-loader-text {
+  font-family: 'Switzer', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-transform: none;
+  white-space: nowrap;
+  user-select: none;
+
+  /* Text becomes the mask — gradient shows through the letters */
+  background: linear-gradient(
+    135deg,
+    #1a0a2e 0%,
+    #4a00e0 12%,
+    #8e2de2 20%,
+    #00d2ff 30%,
+    #ffffff 38%,
+    #4a00e0 48%,
+    #0d0221 55%,
+    #6e3aff 65%,
+    #00b4d8 72%,
+    #ffffff 80%,
+    #8e2de2 88%,
+    #1a0a2e 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  animation: textGradientFlow 3s ease infinite;
+}
+
+@keyframes textGradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Subtle glow behind the text */
+.text-loader-glow {
+  position: absolute;
+  width: 60%;
+  height: 40%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(78, 0, 224, 0.15) 0%,
+    rgba(78, 0, 224, 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Progress bar */
+.text-loader-progress-track {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(180px, 25vw, 320px);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.text-loader-progress-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #4a00e0, #8e2de2, #00d2ff);
+  transition: width 0.15s ease;
+}

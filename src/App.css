@@ -143,9 +143,11 @@
   line-height: 1.5;
 }
 
-/* giant wordmark — full width of footer, fitted on screen */
+/* giant wordmark — full width of footer, behind gradient */
 .footer__brand-wrap {
   overflow: hidden;
   width: 100%;
   max-width: 100%;
+  padding: 0;
+  margin-top: 3rem;
 }

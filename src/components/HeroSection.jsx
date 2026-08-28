@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import cardImage from '../assets/hero-card.png';
-import heroBg from '../assets/03a4ed7fece393b5852e949e95ac518a818ecccd.gif';
+import canvasbg from '../assets/canvasbg.gif';
 
 const HeroSection = ({ heroImageRef }) => {
   const sectionRef = useRef(null);
@@ -123,15 +123,19 @@ const HeroSection = ({ heroImageRef }) => {
       ref={sectionRef}
       id="home"
       className="relative min-h-screen flex flex-col justify-center overflow-visible pt-20 pb-10 px-6 md:px-10 lg:px-16 z-10"
-
+      style={{
+        backgroundImage: `url(${canvasbg})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      }}
     >
-      {/* GIF Background */}
-
-
-      {/* Dark overlay on top of GIF for readability */}
+      {/* Dark gradient overlay on top of GIF for readability */}
       <div
-        className="absolute inset-0 pointer-events-none"
-
+        className="absolute inset-0 pointer-events-none z-[1]"
+        style={{
+          background: 'linear-gradient(rgb(0 6 11 / 96%) 0%, rgba(0, 6, 11, 0.85) 40%, rgb(0 6 11 / 48%) 100%)',
+        }}
       />
 
       {/* Glow effect */}
@@ -149,6 +153,7 @@ const HeroSection = ({ heroImageRef }) => {
           style={{
             fontFamily: 'Switzer, sans-serif',
             fontSize: 'clamp(60px, 12vw, 200px)',
+            letterSpacing: '-1.4px',
           }}
         >
           {'MarkCoders/>'.split('').map((char, i) => (
@@ -157,7 +162,7 @@ const HeroSection = ({ heroImageRef }) => {
               className="hero-letter-hover"
               style={{
                 display: 'inline-block',
-                fontWeight: 700,
+                fontWeight: 600,
                 transition: 'font-weight 0.35s cubic-bezier(0.25, 0.1, 0.25, 1)',
                 cursor: 'default',
               }}
@@ -180,7 +185,7 @@ const HeroSection = ({ heroImageRef }) => {
             {/* Dot Indicator */}
             <div
               ref={dotRef}
-              className="w-3 h-3 rounded-sm bg-white"
+              className="w-3 h-3 bg-white"
               style={{
                 boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.3)',
               }}
@@ -189,7 +194,7 @@ const HeroSection = ({ heroImageRef }) => {
             {/* Description Text */}
             <p
               ref={subTextRef}
-              className="text-lg md:text-xl leading-relaxed text-gray-300 font-light"
+              className="text-[24px] leading-[34px] md:text-[35px] md:leading-[45px] font-medium tracking-[-1px] text-gray-300"
               style={{ fontFamily: 'Switzer, sans-serif' }}
             >
               We work with startups, scaleups, and established brands to launch
@@ -205,10 +210,10 @@ const HeroSection = ({ heroImageRef }) => {
             <div
               className="rounded-2xl p-5 relative overflow-hidden group cursor-pointer flex flex-row gap-4 items-stretch"
               style={{
-                background:
-                  '#00060B',
-                border: '1px solid #FFFFFF66',
-                backdropFilter: 'blur(20px)',
+                background: 'rgba(0, 6, 11, 0.75)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
               }}
             >
               {/* Card shimmer effect on hover */}

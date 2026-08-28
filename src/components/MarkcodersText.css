@@ -15,9 +15,11 @@
 }
 
 .markcoders-wrap--footer {
-  min-height: clamp(120px, 22vw, 280px);
+  min-height: auto;
   padding: 0;
   background: transparent;
+  align-items: flex-end;
+  overflow: visible;
 }
 
 .markcoders-stack {
@@ -39,13 +41,13 @@
   margin-inline: auto;
   text-align: center;
   font-family: 'Switzer', system-ui, sans-serif;
-  font-size: clamp(2.4rem, 14vw, 13.5rem);
+  font-size: clamp(4rem, 17.5vw, 18rem);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 0.8;
   letter-spacing: -0.04em;
   white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  -webkit-text-stroke: none;
   transform: none;
 }
 
@@ -57,20 +59,16 @@
   justify-content: center;
   padding: inherit;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(
-    circle var(--reveal-size) at var(--mouse-x) var(--mouse-y),
-    #000 0%,
-    #000 40%,
-    rgba(0, 0, 0, 0.6) 66%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    circle var(--reveal-size) at var(--mouse-x) var(--mouse-y),
-    #000 0%,
-    #000 40%,
-    rgba(0, 0, 0, 0.6) 66%,
-    transparent 100%
-  );
+  -webkit-mask-image: radial-gradient(circle var(--reveal-size) at var(--mouse-x) var(--mouse-y),
+      #000 0%,
+      #000 40%,
+      rgba(0, 0, 0, 0.6) 66%,
+      transparent 100%);
+  mask-image: radial-gradient(circle var(--reveal-size) at var(--mouse-x) var(--mouse-y),
+      #000 0%,
+      #000 40%,
+      rgba(0, 0, 0, 0.6) 66%,
+      transparent 100%);
 }
 
 .markcoders-reveal .markcoders-stack {
@@ -79,7 +77,6 @@
 }
 
 .markcoders-fill--blue {
-  color: #009cff;
   -webkit-text-stroke: 1px #009cff;
   text-shadow:
     0 0 12px rgba(0, 156, 255, 0.5),
@@ -91,14 +88,9 @@
 }
 
 @media (max-width: 768px) {
-  .markcoders-wrap--footer {
-    min-height: clamp(90px, 28vw, 160px);
-  }
-
   .markcoders-brand {
-    font-size: clamp(2rem, 13.5vw, 5rem);
+    font-size: clamp(2.5rem, 17.5vw, 8rem);
     letter-spacing: -0.05em;
-    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.18);
   }
 
   .markcoders-reveal--blue {
@@ -108,7 +100,7 @@
 
 @media (max-width: 360px) {
   .markcoders-brand {
-    font-size: clamp(1.75rem, 12.5vw, 2.6rem);
+    font-size: clamp(1.75rem, 17.5vw, 4rem);
   }
 }
 

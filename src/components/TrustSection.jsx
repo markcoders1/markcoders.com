@@ -122,7 +122,7 @@ const TrustSection = () => {
       tl.fromTo(
         section,
         { backgroundColor: '#ffffff' },
-        { backgroundColor: '#030712', ease: 'none', duration: 1 },
+        { backgroundColor: '#0a0e17', ease: 'none', duration: 1 },
         0
       );
 
@@ -205,62 +205,92 @@ const TrustSection = () => {
       style={{ backgroundColor: '#ffffff' }}
     >
       <div className="max-w-[1200px] mx-auto w-full min-w-0">
+        {/* ── Heading ── */}
         <h2
           ref={headingRef}
-          className="text-white font-semibold leading-[1.15] tracking-[-0.03em] mb-8 sm:mb-12 md:mb-16 max-w-[900px] break-words"
+          className="text-white font-bold leading-[1.08] tracking-[-0.035em] mb-10 sm:mb-14 md:mb-20 max-w-[900px] break-words"
           style={{
             fontFamily: 'Switzer, sans-serif',
-            fontSize: 'clamp(26px, 7vw, 64px)',
+            fontSize: 'clamp(32px, 7.5vw, 72px)',
+            fontStyle: 'italic',
           }}
         >
           A partner you can trust.
           <br />
-          High standards.
+          High standards. Reliable
           <br />
-          Reliable delivery.
+          delivery.
         </h2>
 
+        {/* ── Cards row ── */}
         <div
           ref={cardsRef}
-          className="flex flex-wrap gap-4 sm:gap-5 md:gap-6 w-full"
+          className="flex flex-col lg:flex-row gap-4 sm:gap-5 md:gap-6 w-full"
         >
-          {/* Stats / trust card — narrower on desktop */}
-          <div className="relative w-full lg:w-[36%] lg:flex-[0_0_36%] min-w-0 rounded-[16px] sm:rounded-[20px] md:rounded-[24px] bg-[#2B5CFF] min-h-[240px] sm:min-h-[300px] md:min-h-[380px] p-5 sm:p-8 md:p-10 flex flex-col justify-between overflow-hidden">
+          {/* ── Left: Stats / trust card (blue) ── */}
+          <div
+            className="relative w-full lg:w-[38%] lg:flex-[0_0_38%] min-w-0 min-h-[280px] sm:min-h-[340px] md:min-h-[400px] flex flex-col justify-between overflow-hidden"
+            style={{
+              backgroundColor: '#1B75BB',
+              borderRadius: '20px',
+              padding: 'clamp(24px, 4vw, 40px)',
+            }}
+          >
+            {/* Large quotation mark */}
             <span
-              className="text-white/90 leading-none select-none"
+              className="select-none block"
               style={{
                 fontFamily: 'Georgia, "Times New Roman", serif',
-                fontSize: 'clamp(56px, 12vw, 120px)',
-                lineHeight: 0.7,
+                fontSize: 'clamp(64px, 14vw, 130px)',
+                lineHeight: 0.65,
+                color: 'rgba(255,255,255,0.92)',
+                marginBottom: '20px',
               }}
               aria-hidden
             >
               &ldquo;
             </span>
 
-            <div className="min-w-0">
+            {/* Bottom text */}
+            <div className="min-w-0 mt-auto">
               <p
-                className="text-white font-semibold tracking-[-0.02em] mb-2 sm:mb-3 break-words"
+                className="text-white font-semibold tracking-[-0.02em] mb-2 sm:mb-3 break-words leading-[1.15]"
                 style={{
                   fontFamily: 'Switzer, sans-serif',
-                  fontSize: 'clamp(22px, 5vw, 40px)',
+                  fontSize: 'clamp(24px, 5vw, 38px)',
                 }}
               >
-                Trusted by 20+ companies.
+                Trusted by 20+
+                <br />
+                companies.
               </p>
               <a
                 href="#why-clients"
-                className="text-white/85 text-[14px] sm:text-[15px] md:text-[16px] hover:text-white transition-colors"
-                style={{ fontFamily: 'Switzer, sans-serif' }}
+                className="text-white/80 hover:text-white transition-colors inline-block"
+                style={{
+                  fontFamily: 'Switzer, sans-serif',
+                  fontSize: 'clamp(13px, 1.6vw, 16px)',
+                  fontWeight: 500,
+                  textDecoration: 'underline',
+                  textUnderlineOffset: '3px',
+                }}
               >
                 Why clients rely on us
               </a>
             </div>
           </div>
 
-          {/* Testimonial slider — wider on desktop */}
-          <div className="relative w-full lg:flex-1 lg:min-w-[58%] min-w-0 rounded-[16px] sm:rounded-[20px] md:rounded-[24px] bg-[#14141A] min-h-[260px] sm:min-h-[320px] md:min-h-[380px] p-5 sm:p-8 md:p-10 flex flex-col justify-between overflow-hidden">
-            <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Testimonials">
+          {/* ── Right: Testimonial slider (dark) ── */}
+          <div
+            className="relative w-full lg:flex-1 min-w-0 min-h-[280px] sm:min-h-[340px] md:min-h-[400px] flex flex-col justify-between overflow-hidden"
+            style={{
+              backgroundColor: '#1c1c24',
+              borderRadius: '20px',
+              padding: 'clamp(24px, 4vw, 40px)',
+            }}
+          >
+            {/* Dots */}
+            <div className="flex items-center gap-[6px]" role="tablist" aria-label="Testimonials">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
@@ -269,40 +299,76 @@ const TrustSection = () => {
                   aria-selected={i === activeIndex}
                   aria-label={`Show testimonial ${i + 1}`}
                   onClick={() => handleDotClick(i)}
-                  className={`w-1.5 h-1.5 rounded-full transition-colors cursor-pointer border-0 p-0 ${
-                    i === activeIndex ? 'bg-white' : 'bg-white/25 hover:bg-white/50'
-                  }`}
+                  style={{
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    backgroundColor:
+                      i === activeIndex
+                        ? 'rgba(255,255,255,0.95)'
+                        : 'rgba(255,255,255,0.22)',
+                    transition: 'background-color 0.25s ease',
+                  }}
                 />
               ))}
             </div>
 
-            <div ref={slideContentRef} className="flex flex-col justify-between flex-1 mt-6 sm:mt-8 min-w-0">
+            {/* Slide content */}
+            <div
+              ref={slideContentRef}
+              className="flex flex-col justify-between flex-1 min-w-0"
+              style={{ marginTop: 'clamp(20px, 3vw, 36px)' }}
+            >
+              {/* Quote */}
               <p
-                className="text-white/95 font-normal leading-[1.45] tracking-[-0.01em] mb-8 sm:mb-10 break-words"
+                className="text-white/90 font-normal break-words"
                 style={{
                   fontFamily: 'Switzer, sans-serif',
-                  fontSize: 'clamp(16px, 4.2vw, 28px)',
+                  fontSize: 'clamp(16px, 2.8vw, 22px)',
+                  lineHeight: 1.55,
+                  letterSpacing: '-0.01em',
+                  marginBottom: 'clamp(24px, 4vw, 48px)',
                 }}
               >
                 {current.quote}
               </p>
 
-              <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+              {/* Author */}
+              <div className="flex items-center gap-3 min-w-0 mt-auto">
                 <img
                   src={current.avatar}
                   alt={current.name}
-                  className="w-9 h-9 sm:w-11 sm:h-11 rounded-[10px] object-cover shrink-0"
+                  style={{
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '10px',
+                    objectFit: 'cover',
+                    flexShrink: 0,
+                  }}
                 />
                 <div className="min-w-0">
                   <p
-                    className="text-white font-medium text-[14px] sm:text-[15px] leading-tight truncate"
-                    style={{ fontFamily: 'Switzer, sans-serif' }}
+                    className="text-white font-medium truncate"
+                    style={{
+                      fontFamily: 'Switzer, sans-serif',
+                      fontSize: '15px',
+                      lineHeight: 1.3,
+                    }}
                   >
                     {current.name}
                   </p>
                   <p
-                    className="text-white/50 text-[12px] sm:text-[13px] mt-0.5 truncate"
-                    style={{ fontFamily: 'Switzer, sans-serif' }}
+                    className="truncate"
+                    style={{
+                      fontFamily: 'Switzer, sans-serif',
+                      fontSize: '13px',
+                      lineHeight: 1.3,
+                      color: 'rgba(255,255,255,0.45)',
+                      marginTop: '2px',
+                    }}
                   >
                     {current.role}
                   </p>

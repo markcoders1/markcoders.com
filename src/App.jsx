@@ -1,6 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import MLoader from './components/MLoader'
+import TextLoader from './components/TextLoader'
 
 const Home = lazy(() => import('./pages/Home'))
 
@@ -20,13 +20,13 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {loading && <MLoader duration={2.8} onComplete={handleLoaderComplete} />}
+      {loading && <TextLoader duration={3} onComplete={handleLoaderComplete} />}
       <Suspense fallback={null}>
         <div
           aria-hidden={loading}
           style={{
             opacity: loading ? 0 : 1,
-            transition: 'opacity 0.45s ease',
+            transition: 'opacity 0.5s ease',
             pointerEvents: loading ? 'none' : 'auto',
           }}
         >
@@ -38,3 +38,5 @@ const App = () => {
 }
 
 export default App
+
+

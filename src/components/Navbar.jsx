@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import marklogo from '../assets/marklogo.png';
 
 const Navbar = () => {
   const navRef = useRef(null);
@@ -79,40 +80,8 @@ const Navbar = () => {
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div ref={logoRef} className="flex items-center gap-3 cursor-pointer select-none">
-          <svg
-            width="32"
-            height="30"
-            viewBox="0 0 38 34"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-auto"
-          >
-            {/* Stylized M / Code Bracket Logo */}
-            <path
-              d="M10 8L2 17L10 26"
-              stroke="#25A9E0"
-              strokeWidth="4.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M28 8L36 17L28 26"
-              stroke="#25A9E0"
-              strokeWidth="4.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M15 28L23 6"
-              stroke="#FFFFFF"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span className="text-2xl font-bold tracking-wider text-white uppercase" style={{ fontFamily: 'Switzer, sans-serif' }}>
-            MARKCODERS<span className="text-[#25A9E0]">/&gt;</span>
-          </span>
+        <div ref={logoRef} className="flex items-center cursor-pointer select-none">
+          <img src={marklogo} alt="MarkCoders" className="h-8 md:h-10 w-auto" />
         </div>
 
         {/* Desktop Nav Links */}
