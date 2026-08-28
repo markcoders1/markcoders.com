@@ -38,7 +38,7 @@ const HeroSection = ({ heroImageRef }) => {
 
       <div className="relative z-10 w-full">
         <PageHero
-          title="MarkCoders/>"
+          title="MarkCodersss/>"
           titleSize="xl"
           layout="split"
           showDot
