@@ -44,7 +44,7 @@ const App = () => {
   }, [loading])
 
   return (
-    <BrowserRouter basename="/Markcoders">
+    <BrowserRouter >
       <ScrollRefresh />
       {loading && <TextLoader duration={3} onComplete={handleLoaderComplete} />}
       <Suspense fallback={null}>
