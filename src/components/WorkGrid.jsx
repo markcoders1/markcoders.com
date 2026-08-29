@@ -131,31 +131,55 @@ const WorkGrid = ({ heroImageRef }) => {
     };
   }, [heroImageRef]);
 
-  // Staggered reveal for grid cards
+  // Scroll scrub animation: Images scale from small to large on scroll (same as ProjectsGrid)
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
     const ctx = gsap.context(() => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
       const cards = [card1Ref.current, card2Ref.current, card3Ref.current, card4Ref.current];
       cards.forEach((card) => {
         if (!card) return;
-        gsap.fromTo(
-          card,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 88%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
+
+        gsap.set(card, { scale: 0.72, yPercent: 8, force3D: true });
+
+        gsap.to(card, {
+          scale: 1,
+          yPercent: 0,
+          ease: 'none',
+          force3D: true,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 95%',
+            end: 'top 35%',
+            scrub: 0.45,
+            invalidateOnRefresh: true,
+          },
+        });
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    const refresh = () => ScrollTrigger.refresh(true);
+    const onLoad = () => refresh();
+
+    const images = section.querySelectorAll('img');
+    images.forEach((img) => {
+      if (!img.complete) img.addEventListener('load', onLoad, { once: true });
+    });
+
+    requestAnimationFrame(refresh);
+    const refreshTimers = [150, 600, 1200].map((ms) =>
+      window.setTimeout(refresh, ms)
+    );
+
+    return () => {
+      refreshTimers.forEach((id) => window.clearTimeout(id));
+      images.forEach((img) => img.removeEventListener('load', onLoad));
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -171,7 +195,7 @@ const WorkGrid = ({ heroImageRef }) => {
         {/* Card 1 (Top Left) - Vantage - Blank initially, image lands here on scroll */}
         <div
           ref={card1Ref}
-          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14]"
+          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14] will-change-transform origin-center"
         >
           {/* This image shows ONLY when morph is complete */}
           <img
@@ -186,7 +210,7 @@ const WorkGrid = ({ heroImageRef }) => {
         {/* Card 2 (Top Right) - Sauced */}
         <div
           ref={card2Ref}
-          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14]"
+          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14] will-change-transform origin-center"
         >
           <img
             src={saucedImg}
@@ -198,7 +222,7 @@ const WorkGrid = ({ heroImageRef }) => {
         {/* Card 3 (Bottom Left) - Jersey / Shareable vCard Platform */}
         <div
           ref={card3Ref}
-          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14]"
+          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14] will-change-transform origin-center"
         >
           <img
             src={jerseyImg}
@@ -210,7 +234,7 @@ const WorkGrid = ({ heroImageRef }) => {
         {/* Card 4 (Bottom Right) - The Jersey Generator */}
         <div
           ref={card4Ref}
-          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14]"
+          className="w-full max-w-[661.02px] h-[520px] sm:h-[650px] lg:h-[804px] rounded-[32px] relative overflow-hidden group cursor-pointer bg-[#0A0D14] will-change-transform origin-center"
         >
           <img
             src={jersey2Img}

@@ -3,11 +3,16 @@ import { FEATURED_PROJECT } from '../data/projects';
 
 const OurWorkCard = ({ imageRef, tagline, image, title }) => (
   <div
-    className="w-full rounded-2xl p-5 relative overflow-hidden group cursor-pointer flex flex-row gap-4 items-stretch"
+    className="w-full max-w-[430.82px] h-[216.86px] rounded-[15px] p-[10px] relative overflow-hidden group cursor-pointer flex flex-row items-stretch"
     style={{
+      width: '430.82px',
+      maxWidth: '100%',
+      height: '216.86px',
       background: '#00060B',
-      border: '1px solid rgba(255, 255, 255, 0.4)',
+      border: '1px solid #FFFFFF66',
+      borderRadius: '15px',
       backdropFilter: 'blur(20px)',
+      opacity: 1,
     }}
   >
     <div
@@ -18,33 +23,48 @@ const OurWorkCard = ({ imageRef, tagline, image, title }) => (
       }}
     />
 
-    <div className="flex flex-col justify-between flex-1 relative z-10 min-w-[160px]">
-      <div className="flex flex-col gap-1">
+    <div className="flex flex-col justify-between flex-1 relative z-10 pl-3 pr-2 py-1.5 h-full">
+      <div className="flex flex-col">
         <span
-          className="text-sm font-medium text-gray-400 tracking-wide"
-          style={{ fontFamily: 'Switzer, sans-serif' }}
+          className="text-white select-none"
+          style={{
+            fontFamily: 'Switzer, sans-serif',
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '26px',
+            letterSpacing: '-1px',
+            verticalAlign: 'middle',
+          }}
         >
           Our work
         </span>
         <h3
-          className="text-base font-semibold text-white leading-snug text-left"
-          style={{ fontFamily: 'Switzer, sans-serif' }}
+          className="mt-2.5 select-none text-left"
+          style={{
+            fontFamily: 'Switzer, sans-serif',
+            fontWeight: 500,
+            fontSize: '18px',
+            lineHeight: '26px',
+            letterSpacing: '-1px',
+            verticalAlign: 'middle',
+            color: '#FFFFFF66',
+          }}
         >
           {tagline}
         </h3>
       </div>
 
-      <div className="flex justify-start mt-4">
+      <div className="flex justify-start mt-auto">
         <div
-          className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+          className="w-[42px] h-[42px] rounded-[10px] flex items-center justify-center transition-all duration-300 group-hover:scale-105"
           style={{
-            background: 'linear-gradient(135deg, #1a7af8 0%, #1565d8 100%)',
-            boxShadow: '0 2px 10px rgba(26, 122, 248, 0.3)',
+            background: '#1399e8',
+            boxShadow: '0 2px 10px rgba(19, 153, 232, 0.3)',
           }}
         >
           <svg
-            width="16"
-            height="16"
+            width="18"
+            height="18"
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +73,7 @@ const OurWorkCard = ({ imageRef, tagline, image, title }) => (
             <path
               d="M4 12L12 4M12 4H5.33M12 4V10.67"
               stroke="white"
-              strokeWidth="1.5"
+              strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -62,13 +82,25 @@ const OurWorkCard = ({ imageRef, tagline, image, title }) => (
       </div>
     </div>
 
-    <div className="relative rounded-2xl w-[160px] md:w-[190px] flex-shrink-0 min-h-[170px] z-30">
+    <div
+      className="relative flex-shrink-0 z-30 overflow-hidden"
+      style={{
+        width: '162.16px',
+        height: '197.3px',
+        borderRadius: '15px',
+      }}
+    >
       <img
         ref={imageRef}
         src={image}
         alt={title}
-        className="w-full h-full rounded-2xl object-cover transition-transform duration-700 group-hover:scale-105 relative z-50 will-change-transform"
-        style={{ minHeight: '170px' }}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-50 will-change-transform opacity-100"
+        style={{
+          width: '162.16px',
+          height: '197.3px',
+          borderRadius: '15px',
+          opacity: 1,
+        }}
         draggable={false}
       />
     </div>

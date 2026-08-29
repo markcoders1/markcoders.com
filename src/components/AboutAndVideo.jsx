@@ -106,23 +106,27 @@ const AboutAndVideo = () => {
         });
       }
 
-      // 3. Video Box Scroll Animation (Expanding to full width)
+      // 3. Video Box Scroll Animation (Expanding from small to full width)
       if (videoWrapperRef.current) {
         gsap.fromTo(
           videoWrapperRef.current,
           {
-            width: '85%',
-            borderRadius: '24px',
+            width: '40%',
+            scale: 0.6,
+            borderRadius: '36px',
           },
           {
             width: '100%',
+            scale: 1,
             borderRadius: '0px',
             ease: 'none',
+            force3D: true,
             scrollTrigger: {
               trigger: videoWrapperRef.current,
               start: 'top 95%',
-              end: 'top 20%',
-              scrub: true,
+              end: 'top 15%',
+              scrub: 0.6,
+              invalidateOnRefresh: true,
             },
           }
         );
@@ -141,7 +145,7 @@ const AboutAndVideo = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 mb-24 md:mb-32">
         {/* (All Work) Label */}
         <h2
-          className="text-[#25A9E0] text-center mb-16 md:mb-24"
+          className="text-[#25A9E0] text-center mb-[120px] sm:mb-[180px] md:mb-[220px] lg:mb-[260px]"
           style={{
             fontFamily: 'Switzer, sans-serif',
             fontWeight: 500,
@@ -160,7 +164,7 @@ const AboutAndVideo = () => {
           style={{
             fontFamily: 'Switzer, sans-serif',
             fontWeight: 500,
-            fontSize: 'clamp(36px, 5.8vw, 84px)',
+            fontSize: 'clamp(36px, 5.8vw, 91px)',
             lineHeight: '1.15',
             letterSpacing: '-0.035em',
           }}
@@ -237,7 +241,7 @@ const AboutAndVideo = () => {
               style={{
                 fontFamily: 'Switzer, sans-serif',
                 fontWeight: 500,
-                fontSize: 'clamp(16px, 1.45vw, 20px)',
+                fontSize: 'clamp(16px, 1.45vw, 26px)',
                 lineHeight: '1.4',
                 letterSpacing: '-0.02em',
               }}
@@ -252,8 +256,8 @@ const AboutAndVideo = () => {
       <div className="w-full flex justify-center items-center py-6">
         <div
           ref={videoWrapperRef}
-          className="relative h-[55vh] md:h-[75vh] overflow-hidden mx-auto"
-          style={{ width: '85%', borderRadius: '24px' }}
+          className="relative h-[55vh] md:h-[75vh] overflow-hidden mx-auto will-change-transform"
+          style={{ width: '40%', transform: 'scale(0.6)', borderRadius: '36px' }}
         >
           <img
             ref={videoImgRef}

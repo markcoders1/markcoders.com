@@ -231,7 +231,7 @@ const WhatWeDo = () => {
                 <span
                   style={{
                     fontFamily: 'Switzer, sans-serif',
-                    fontSize: 'clamp(11px, 1.1vw, 14px)',
+                    fontSize: 'clamp(11px, 1.1vw, 31px)',
                     color: activeIndex === index ? 'rgba(255,255,255,0.7)' : '#999',
                     fontWeight: 500,
                     letterSpacing: '0.04em',
@@ -246,7 +246,7 @@ const WhatWeDo = () => {
                 <span
                   style={{
                     fontFamily: 'Switzer, sans-serif',
-                    fontSize: 'clamp(26px, 4.5vw, 52px)',
+                    fontSize: 'clamp(26px, 4.5vw, 91px)',
                     fontWeight: activeIndex === index ? 600 : 400,
                     color: activeIndex === index ? '#fff' : '#1a1a1a',
                     letterSpacing: '-0.02em',

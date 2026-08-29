@@ -18,6 +18,8 @@ const PageHero = ({
   className = '',
   titleClassName = '',
   subtitleClassName = '',
+  subtitleContainerClassName = 'max-w-md',
+  subtitleStyle = {},
   children,
 }) => {
   const sectionRef = useRef(null);
@@ -120,12 +122,14 @@ const PageHero = ({
   const subtitleEl = subtitle && (
     <p
       ref={subRef}
-      className={`text-lg md:text-xl leading-relaxed text-gray-300 font-light ${
-        isCenter
-          ? 'mt-10 md:mt-14 max-w-[640px] text-white/55 text-lg md:text-xl lg:text-2xl'
-          : 'max-w-md'
-      } ${subtitleClassName}`}
-      style={{ fontFamily: 'Switzer, sans-serif' }}
+      className={`${subtitleClassName
+          ? subtitleClassName
+          : `text-lg md:text-xl leading-relaxed text-gray-300 font-light ${isCenter
+            ? 'mt-10 md:mt-14 max-w-[640px] text-white/55 text-lg md:text-xl lg:text-2xl'
+            : 'max-w-md'
+          }`
+        }`}
+      style={{ fontFamily: 'Switzer, sans-serif', ...subtitleStyle }}
     >
       {subtitle}
     </p>
@@ -134,7 +138,7 @@ const PageHero = ({
   const dotEl = showDot && (
     <div
       ref={dotRef}
-      className={`w-3 h-3 rounded-sm bg-white ${isCenter ? 'mx-auto' : ''}`}
+      className={`w-3 h-3 bg-white ${isCenter ? 'mx-auto' : ''}`}
       style={{ boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.3)' }}
     />
   );
@@ -147,7 +151,7 @@ const PageHero = ({
       <div
         className={`max-w-[1400px] mx-auto w-full relative z-10 ${
           isCenter ? 'flex flex-col items-center text-center' : ''
-        } ${spread ? 'flex flex-col flex-1 h-full' : ''}`}
+        } ${spread ? 'flex flex-col flex-1 h-full justify-between' : ''}`}
       >
         <AnimatedHeroTitle
           ref={headingRef}
@@ -160,11 +164,11 @@ const PageHero = ({
 
         {isSplit ? (
           <div
-            className={`flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-12 ${
+            className={`w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-12 ${
               spread ? 'mt-auto pt-10 md:pt-16' : 'mt-8 md:mt-12'
             }`}
           >
-            <div className="flex flex-col gap-6 max-w-md">
+            <div className={`flex flex-col gap-6 ${subtitleContainerClassName}`}>
               {dotEl}
               {subtitleEl}
             </div>
@@ -183,11 +187,10 @@ const PageHero = ({
             {children && (
               <div
                 ref={footerRef}
-                className={`w-full ${
-                  isCenter
+                className={`w-full ${isCenter
                     ? 'flex justify-center mt-12 md:mt-16 lg:mt-20'
                     : 'mt-8 md:mt-12'
-                }`}
+                  }`}
               >
                 {children}
               </div>
