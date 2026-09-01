@@ -77,10 +77,18 @@ const Footer = () => {
 
   return (
     <footer ref={rootRef} className="footer footer-bg">
-      <div className="footer__inner mx-auto w-full max-w-[1440px] px-6 pt-16 sm:px-10 sm:pt-20 lg:px-20 lg:pt-24">
+      <div className="footer__inner mx-auto w-full max-w-[1440px] px-6 pt-16 sm:px-10 sm:pt-20 lg:px-20 lg:pt-24 pb-40">
         <div className="footer__top flex flex-col gap-14 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
           <div className="footer__intro max-w-md">
-            <h2 className="footer__heading text-3xl font-semibold leading-tight sm:text-4xl">
+            <h2
+              className="footer__heading font-medium text-white"
+              style={{
+                fontFamily: 'Switzer, sans-serif',
+                fontSize: 'clamp(22px, 3.5vw, 35px)',
+                lineHeight: 'clamp(26px, 4vw, 39px)',
+                letterSpacing: '-1px',
+              }}
+            >
               {HEADING_LINES.map((line) => (
                 <span className="footer__line-mask" key={line}>
                   <span className="js-line footer__line">{line}</span>
@@ -88,19 +96,47 @@ const Footer = () => {
               ))}
             </h2>
 
-            <Link to="/contact" className="js-cta footer__cta mt-8">
-              <span className="footer__cta-icon" aria-hidden="true">
-                ↗
-              </span>
-              Get in Touch
+            <Link
+              to="/contact"
+              className="js-cta inline-flex items-center justify-center gap-2.5 px-7 text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-xl mt-20 group"
+              style={{
+                height: '52.88px',
+                borderRadius: '15px',
+                background: '#25A9E0',
+                boxShadow: '0 4px 20px rgba(37, 169, 224, 0.3)',
+                fontFamily: 'Switzer, sans-serif',
+                fontWeight: 500,
+                fontSize: '18px',
+                lineHeight: '30px',
+                letterSpacing: '-0.5px',
+                textDecoration: 'none'
+              }}
+            >
+              <svg
+                width="19.08"
+                height="19.08"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              >
+                <path
+                  d="M7 17L17 7M17 7H7M17 7V17"
+                  stroke="white"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>Get in Touch</span>
             </Link>
           </div>
 
           <nav
-            className="footer__columns grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-x-14 lg:gap-x-20"
+            className="footer__columns flex flex-col sm:flex-row flex-wrap gap-10 sm:gap-16 lg:gap-24"
             aria-label="Footer"
           >
-            <div className="js-col footer__col col-span-2 sm:col-span-1">
+            <div className="js-col footer__col">
               <h3 className="footer__col-title">Explore</h3>
               <ul>
                 {EXPLORE_LINKS.map((link) => (
@@ -131,7 +167,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="js-col footer__col">
+            <div className="js-col footer__col max-w-[280px]">
               <h3 className="footer__col-title">Contact</h3>
               <ul>
                 <li>
@@ -146,7 +182,6 @@ const Footer = () => {
                 </li>
                 <li className="footer__address">
                   E15, Street No. 2, Block A,
-                  <br />
                   Gulshan-e-Jamal, Karachi
                 </li>
               </ul>

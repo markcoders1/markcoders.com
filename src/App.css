@@ -84,9 +84,12 @@
 
 /* nav columns */
 .footer__col-title {
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-family: 'Switzer', sans-serif;
+  color: #25A9E0;
+  font-weight: 500;
+  font-size: clamp(18px, 2.5vw, 22px);
+  line-height: clamp(28px, 4vw, 36px);
+  letter-spacing: -1px;
   margin-bottom: 1.1rem;
 }
 
@@ -102,9 +105,13 @@
 .footer__link {
   position: relative;
   display: inline-block;
-  color: var(--ink);
+  color: #FFFFFF;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 500;
+  line-height: clamp(26px, 4vw, 36px);
+  letter-spacing: -1px;
   width: fit-content;
 }
 
@@ -138,9 +145,12 @@
 }
 
 .footer__address {
-  color: rgba(245, 248, 255, 0.85);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  color: #FFFFFF;
+  font-family: 'Switzer', sans-serif;
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 500;
+  line-height: clamp(26px, 4vw, 36px);
+  letter-spacing: -1px;
 }
 
 /* giant wordmark — full width of footer, behind gradient */

@@ -1,14 +1,15 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import playwithImg from '../assets/playwith.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const images = [
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80'
+  playwithImg,
+  playwithImg,
+  playwithImg,
+  playwithImg
 ];
 
 const WorkAndPlaySection = () => {
@@ -22,7 +23,7 @@ const WorkAndPlaySection = () => {
       if (slides.length === 4) {
         // Set initial state (stacked at the bottom center, fully visible)
         gsap.set(slides, {
-          y: '35vh',
+          y: '10vh',
           xPercent: -50,
           left: '50%',
           scale: 0.9,
@@ -59,18 +60,18 @@ const WorkAndPlaySection = () => {
   }, []);
 
   return (
-    <section className="w-full">
+    <section className="w-full bg-[#f5f5f5]">
       <div
         ref={containerRef}
-        className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden"
-        style={{ color: '#111', backgroundColor: 'rgb(245, 245, 245)' }}
+        className="relative w-full h-[100vh] flex flex-col items-center justify-start pt-[15vh] md:pt-[20vh] overflow-hidden"
+        style={{ color: '#111' }}
       >
         {/* Heading */}
         <h2
-          className="text-center font-normal leading-[1] uppercase z-10  text-[#111] "
-          style={{ fontFamily: 'Switzer, sans-serif', fontSize: 'clamp(48px, 10vw, 60px)' }}
+          className="text-center font-medium leading-[1.05] tracking-tight z-10 text-[#111]"
+          style={{ fontFamily: 'Switzer, sans-serif', fontSize: 'clamp(48px, 6vw, 68px)', letterSpacing: '-0.04em' }}
         >
-          There’s work<br />and there’s play
+          There’s work and<br />there’s play
         </h2>
 
         {/* The 4 Images */}
@@ -79,7 +80,7 @@ const WorkAndPlaySection = () => {
             key={index}
             src={src}
             alt={`Work and Play ${index + 1}`}
-            className="scatter-image absolute top-1/2 w-[220px] h-[220px] md:w-[280px] md:h-[280px] object-cover border-[8px] border-white shadow-2xl z-20"
+            className="scatter-image absolute top-1/2 w-[220px] h-[220px] md:w-[320px] md:h-[320px] object-cover z-20"
             style={{ transform: 'translate(-50%, -50%)' }} // Initial centering alignment
           />
         ))}

@@ -148,12 +148,12 @@ const WhatWeDo = () => {
     >
       <div className="py-20 md:py-32 w-full">
         {/* Section Heading */}
-        <div ref={headingRef} className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 mb-16 md:mb-24">
+        <div ref={headingRef} className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 mb-16 md:mb-24 flex justify-center">
           <h2
             className="text-[#111] leading-[1.05] tracking-tight"
             style={{
               fontFamily: 'Switzer, sans-serif',
-              fontSize: 'clamp(48px, 10vw, 190px)',
+              fontSize: 'clamp(48px, 11vw, 190px)',
               fontWeight: 400,
             }}
           >

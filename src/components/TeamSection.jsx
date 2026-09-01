@@ -167,7 +167,7 @@ const TeamSection = () => {
           <div className="md:col-span-5 flex flex-col pt-4">
 
             {/* Avatars Grid */}
-            <div className="avatars-container flex flex-wrap gap-2 md:gap-[10px] max-w-[380px] mb-12">
+            <div className="avatars-container flex flex-wrap gap-2 md:gap-[10px] max-w-[380px] mb-20">
               {avatars.map((src, i) => (
                 <div
                   key={i}
@@ -198,26 +198,26 @@ const TeamSection = () => {
               ref={cardRef}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="bg-white rounded-[24px] shadow-[0_12px_40px_rgba(0,0,0,0.05)] w-full max-w-[600px] p-8 md:p-12"
+              className="bg-white rounded-[24px] shadow-[0_12px_40px_rgba(0,0,0,0.05)] w-full max-w-[600px] p-8 md:p-8"
               style={{ transformStyle: 'preserve-3d' }}
             >
 
               {/* Stat Row 1 */}
-              <div className="flex items-center justify-between py-6">
+              <div className="flex items-center justify-between pt-12 pb-5 ">
                 <span className="text-[#111] text-[16px] md:text-[30px] font-medium tracking-tight">Team Members</span>
                 <span className="text-[#23b3e8] text-[24px] md:text-[35px] font-medium">35</span>
               </div>
               <div className="w-full h-[1px] bg-[#808385]"></div>
 
               {/* Stat Row 2 */}
-              <div className="flex items-center justify-between py-6">
+              <div className="flex items-center justify-between pt-12 pb-5">
                 <span className="text-[#111] text-[16px] md:text-[30px] font-medium tracking-tight">Core Disciplines</span>
                 <span className="text-[#23b3e8] text-[24px] md:text-[35px] font-medium">06</span>
               </div>
               <div className="w-full h-[1px] bg-[#808385]"></div>
 
               {/* Stat Row 3 */}
-              <div className="flex items-center justify-between py-6">
+              <div className="flex items-center justify-between pt-12 pb-5">
                 <span className="text-[#111] text-[16px] md:text-[30px] font-medium tracking-tight">Years Experience</span>
                 <span className="text-[#23b3e8] text-[24px] md:text-[35px] font-medium">5+</span>
               </div>

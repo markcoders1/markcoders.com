@@ -2,30 +2,30 @@ import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import webflowImg from '../assets/webflow.png';
-import figmaImg from '../assets/figma.png';
-import cameraImg from '../assets/camera.png';
-import framerImg from '../assets/framer.png';
-import geminiImg from '../assets/gemini.png';
-import aeImg from '../assets/ae.png';
-import psImg from '../assets/ps.png';
-import pImg from '../assets/p.png';
-import claudeImg from '../assets/claude.png';
-import aiImg from '../assets/ai.png';
+import webflowImg from '../assets/Tools Logo/webflow.png';
+import figmaImg from '../assets/Tools Logo/figma.png';
+import shopifyImg from '../assets/Tools Logo/shopify.png';
+import wordpressImg from '../assets/Tools Logo/wordpress.png';
+import aiImg from '../assets/Tools Logo/illustartor.png';
+import psImg from '../assets/Tools Logo/photoshop.png';
+import reactImg from '../assets/Tools Logo/react.png';
+import framerImg from '../assets/Tools Logo/framer.png';
+import cubeImg from '../assets/Tools Logo/cube.png';
+import tsImg from '../assets/Tools Logo/typescript.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const tools = [
   { name: 'Webflow', img: webflowImg },
   { name: 'Figma', img: figmaImg },
-  { name: 'Cinema 4D', img: cameraImg },
-  { name: 'Framer', img: framerImg },
-  { name: 'Gemini', img: geminiImg },
-  { name: 'After Effects', img: aeImg },
-  { name: 'Photoshop', img: psImg },
-  { name: 'PowerPoint', img: pImg },
-  { name: 'Claude', img: claudeImg },
+  { name: 'Shopify', img: shopifyImg },
+  { name: 'WordPress', img: wordpressImg },
   { name: 'Illustrator', img: aiImg },
+  { name: 'Photoshop', img: psImg },
+  { name: 'React', img: reactImg },
+  { name: 'Framer', img: framerImg },
+  { name: 'Cube', img: cubeImg },
+  { name: 'Tailwind', img: tsImg },
 ];
 
 const cards = [
@@ -153,7 +153,7 @@ const ToolsSection = () => {
 
           {/* Tools Row */}
           <div
-            className="flex flex-wrap items-end justify-center md:justify-start gap-2 md:gap-3 my-2 pl-2 md:pl-12 relative z-20 h-[80px] md:h-[120px]"
+            className="flex flex-wrap items-end justify-center md:justify-start gap-[12px] md:gap-[23px] my-2 relative z-20 h-[80px] md:h-[120px]"
             onMouseLeave={() => setHoveredIndex(null)}
           >
             {tools.map((tool, index) => {
@@ -162,7 +162,7 @@ const ToolsSection = () => {
               const isFar = hoveredIndex !== null && !isHovered && !isAdjacent;
 
               // Mobile vs Desktop sizes
-              const baseSize = 'w-[48px] h-[48px] md:w-[68px] md:h-[68px]';
+              const baseSize = 'w-[48px] h-[48px] md:w-[73px] md:h-[73px]';
               const adjacentSize = 'w-[56px] h-[56px] md:w-[84px] md:h-[84px]';
               const hoveredSize = 'w-[64px] h-[64px] md:w-[104px] md:h-[104px]';
 
@@ -209,9 +209,9 @@ const ToolsSection = () => {
             })}
           </div>
 
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex justify-end w-full">
             <h2
-              className="tools-heading font-medium tracking-tight leading-[1] mt-6 md:mt-8 self-end"
+              className="tools-heading font-medium tracking-tight leading-[1] mt-6 md:mt-8"
               style={{ fontFamily: 'Switzer, sans-serif', fontSize: 'clamp(56px, 9vw, 110px)', letterSpacing: '-0.04em' }}
             >
               your brand.
@@ -249,7 +249,7 @@ const ToolsSection = () => {
                   <h3 className="text-[32px] md:text-[40px] font-medium tracking-[-0.05em] mb-5 text-[#111]">
                     {card.title}
                   </h3>
-                  <div className="w-full h-[1px] bg-[#e5e5e5] mb-5"></div>
+                  <div className="w-full h-[1px] bg-[#e5e5e5] mb-12"></div>
                   <div className="mb-4 max-w-[95%]">
                     <p className="text-[#111] text-[14px] md:text-[20px] leading-[1.4] font-medium tracking-[-0.01em]">
                       {card.desc}
@@ -278,9 +278,9 @@ const ToolsSection = () => {
                   <h3 className="text-[32px] md:text-[36px] font-medium tracking-[-0.05em] mb-5 text-[#111]">
                     {card.title}
                   </h3>
-                  <div className="w-full h-[1px] bg-[#e5e5e5] mb-5"></div>
+                  <div className="w-full h-[1px] bg-[#e5e5e5] mb-12"></div>
                   <div className="mb-4 max-w-[95%]">
-                    <p className="text-[#111] text-[14px] md:text-[15px] leading-[1.4] font-medium tracking-[-0.01em]">
+                    <p className="text-[#111] text-[14px] md:text-[20px] leading-[1.4] font-medium tracking-[-0.01em]">
                       {card.desc}
                     </p>
                   </div>

@@ -62,6 +62,8 @@ const TrustSection = () => {
         const childNodes = Array.from(heading.childNodes);
         heading.innerHTML = '';
 
+        let isFirstText = true;
+
         childNodes.forEach((node) => {
           if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'BR') {
             heading.appendChild(document.createElement('br'));
@@ -71,12 +73,18 @@ const TrustSection = () => {
           const text = (node.textContent || '').replace(/\s+/g, ' ').trim();
           if (!text) return;
 
+          if (isFirstText) {
+            const spacer = document.createElement('span');
+            spacer.className = 'inline-block w-[102px]';
+            spacer.setAttribute('aria-hidden', 'true');
+            heading.appendChild(spacer);
+            isFirstText = false;
+          }
+
           const words = text.split(' ').filter(Boolean);
           words.forEach((word, idx) => {
             const wordSpan = document.createElement('span');
-            wordSpan.style.display = 'inline-block';
-            wordSpan.style.whiteSpace = 'normal';
-            wordSpan.style.maxWidth = '100%';
+            wordSpan.className = 'inline-block mr-[0.25em] whitespace-nowrap ';
 
             for (const char of word) {
               const charSpan = document.createElement('span');
@@ -87,9 +95,6 @@ const TrustSection = () => {
             }
 
             heading.appendChild(wordSpan);
-            if (idx < words.length - 1) {
-              heading.appendChild(document.createTextNode(' '));
-            }
           });
         });
 
@@ -122,7 +127,7 @@ const TrustSection = () => {
       tl.fromTo(
         section,
         { backgroundColor: '#ffffff' },
-        { backgroundColor: '#0a0e17', ease: 'none', duration: 1 },
+        { backgroundColor: '#000000', ease: 'none', duration: 1 },
         0
       );
 
@@ -208,11 +213,10 @@ const TrustSection = () => {
         {/* ── Heading ── */}
         <h2
           ref={headingRef}
-          className="text-white font-bold leading-[1.08] tracking-[-0.035em] mb-10 sm:mb-14 md:mb-20 max-w-[900px] break-words"
+          className="text-white font-medium leading-[1.08] tracking-[-0.035em] mb-10 sm:mb-14 md:mb-20 max-w-[1100px] break-words"
           style={{
             fontFamily: 'Switzer, sans-serif',
-            fontSize: 'clamp(32px, 7.5vw, 72px)',
-            fontStyle: 'italic',
+            fontSize: 'clamp(32px, 7.5vw, 91px)',
           }}
         >
           A partner you can trust.
@@ -248,16 +252,16 @@ const TrustSection = () => {
               }}
               aria-hidden
             >
-              &ldquo;
+              “
             </span>
 
             {/* Bottom text */}
             <div className="min-w-0 mt-auto">
               <p
-                className="text-white font-semibold tracking-[-0.02em] mb-2 sm:mb-3 break-words leading-[1.15]"
+                className="text-white font-medium tracking-[-0.02em] mb-2 sm:mb-3 break-words leading-[1.15]"
                 style={{
                   fontFamily: 'Switzer, sans-serif',
-                  fontSize: 'clamp(24px, 5vw, 38px)',
+                  fontSize: 'clamp(24px, 5vw, 30px)',
                 }}
               >
                 Trusted by 20+
@@ -269,9 +273,8 @@ const TrustSection = () => {
                 className="text-white/80 hover:text-white transition-colors inline-block"
                 style={{
                   fontFamily: 'Switzer, sans-serif',
-                  fontSize: 'clamp(13px, 1.6vw, 16px)',
+                  fontSize: 'clamp(13px, 1.6vw, 22px)',
                   fontWeight: 500,
-                  textDecoration: 'underline',
                   textUnderlineOffset: '3px',
                 }}
               >
@@ -284,7 +287,7 @@ const TrustSection = () => {
           <div
             className="relative w-full lg:flex-1 min-w-0 min-h-[280px] sm:min-h-[340px] md:min-h-[400px] flex flex-col justify-between overflow-hidden"
             style={{
-              backgroundColor: '#1c1c24',
+              backgroundColor: '#151515',
               borderRadius: '20px',
               padding: 'clamp(24px, 4vw, 40px)',
             }}
@@ -327,7 +330,7 @@ const TrustSection = () => {
                 className="text-white/90 font-normal break-words"
                 style={{
                   fontFamily: 'Switzer, sans-serif',
-                  fontSize: 'clamp(16px, 2.8vw, 22px)',
+                  fontSize: 'clamp(16px, 2.8vw, 26px)',
                   lineHeight: 1.55,
                   letterSpacing: '-0.01em',
                   marginBottom: 'clamp(24px, 4vw, 48px)',
