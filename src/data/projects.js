@@ -143,7 +143,7 @@ export const GRID_PROJECTS = [
 
 // Hero preview card
 export const FEATURED_PROJECT = {
-  tagline: 'Designing a bold choice for thought leadership.',
+  tagline: 'Designing a bold voice for thought  leadership',
   image: GRID_PROJECTS[0].images[0].src,
   title: GRID_PROJECTS[0].title,
 };

@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import TextLoader from './components/TextLoader'
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,10 +15,26 @@ function ScrollRefresh() {
   const location = useLocation()
 
   useEffect(() => {
+    const lenis = new Lenis()
+
+    lenis.on('scroll', ScrollTrigger.update)
+
+    const ticker = (time) => {
+      lenis.raf(time * 1000)
+    }
+
+    gsap.ticker.add(ticker)
+    gsap.ticker.lagSmoothing(0)
+
     const refresh = () => ScrollTrigger.refresh(true)
     requestAnimationFrame(refresh)
     const t = window.setTimeout(refresh, 300)
-    return () => window.clearTimeout(t)
+
+    return () => {
+      lenis.destroy()
+      gsap.ticker.remove(ticker)
+      window.clearTimeout(t)
+    }
   }, [location.pathname])
 
   return null

@@ -1,5 +1,6 @@
 import PageHero from './landing/PageHero';
 import { FEATURED_PROJECT } from '../data/projects';
+import canvasBg from '../assets/canvasbg.gif';
 
 const OurWorkCard = ({ imageRef, tagline, image, title }) => (
   <div
@@ -19,7 +20,7 @@ const OurWorkCard = ({ imageRef, tagline, image, title }) => (
       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
       style={{
         background:
-          'linear-gradient(135deg, transparent 30%, rgba(26, 122, 248, 0.06) 50%, transparent 70%)',
+          'linear-gradient(135deg, transparent 30%, rgba(26, 122, 248, 0.05) 50%, transparent 70%)',
       }}
     />
 
@@ -94,7 +95,7 @@ const OurWorkCard = ({ imageRef, tagline, image, title }) => (
         ref={imageRef}
         src={image}
         alt={title}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-50 will-change-transform opacity-100"
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 relative z-50 will-change-transform opacity-100 origin-center"
         style={{
           width: '162.16px',
           height: '197.3px',
@@ -111,25 +112,64 @@ const ProjectsHero = ({ previewImageRef }) => {
   const featured = FEATURED_PROJECT;
 
   return (
-    <section className="relative min-h-[100svh] flex flex-col pt-28 pb-10 px-6 md:px-10 lg:px-16 overflow-hidden">
-      <PageHero
-        title="Projects"
-        subtitle="We've successfully delivered a wide range of projects, helping brands grow and thrive."
-        layout="split"
-        spread
-        titleSize="xl"
-        className="flex-1"
-      >
-        <OurWorkCard
-          imageRef={previewImageRef}
-          tagline={featured.tagline}
-          image={featured.image}
-          title={featured.title}
-        />
-      </PageHero>
+    <section className="relative min-h-[100svh] flex flex-col justify-between pt-28 pb-12 px-6 md:px-10 lg:px-16 overflow-visible z-10">
+      {/* Background GIF */}
+      <img
+        src={canvasBg}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0 opacity-80"
+        style={{
+          filter: 'brightness(0.9) contrast(1.1)',
+        }}
+      />
+
+      {/* Top Gradient Overlay for smooth blending with Navbar */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'linear-gradient(rgb(0, 6, 11) 0%, rgb(0 0 0 / 89%) 25%, rgba(0, 6, 11, 0.3) 50%, rgba(0, 6, 11, 0.8) 100%)',
+        }}
+      />
+
+      {/* Ambient Blue Glow */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background:
+            'radial-gradient(circle at 50% 35%, rgba(26, 122, 248, 0.15) 0%, transparent 65%)',
+        }}
+      />
+      <div className="relative z-10 w-full flex-1 flex flex-col">
+        <PageHero
+          title="Projects"
+          subtitle="We've successfully delivered a wide range of projects, helping brands grow and thrive."
+          layout="split"
+          spread
+          showDot
+          titleSize="210px"
+          className="flex-1"
+          titleClassName="!tracking-[-1.4px] my-auto"
+          subtitleClassName="!text-[35px] leading-[1.2] font-[500] tracking-[-1px] text-white/90"
+          subtitleContainerClassName="max-w-xl lg:max-w-2xl"
+          subtitleStyle={{
+            fontFamily: 'Switzer, sans-serif',
+            fontWeight: 500,
+            letterSpacing: '-1px',
+            verticalAlign: 'middle',
+          }}
+        >
+          <OurWorkCard
+            imageRef={previewImageRef}
+            tagline={featured.tagline}
+            image={featured.image}
+            title={featured.title}
+          />
+        </PageHero>
+      </div>
 
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10"
         style={{
           background: 'linear-gradient(180deg, transparent 0%, rgba(3,7,18,1) 100%)',
         }}

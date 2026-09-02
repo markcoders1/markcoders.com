@@ -18,7 +18,7 @@ const AnimatedHeroTitle = forwardRef(function AnimatedHeroTitle(
       className={`leading-[0.9] tracking-[-0.04em] text-white ${className}`}
       style={{
         fontFamily: 'Switzer, sans-serif',
-        fontSize: TITLE_SIZES[size] || TITLE_SIZES.lg,
+        fontSize: TITLE_SIZES[size] || size || TITLE_SIZES.lg,
       }}
     >
       {text.split('').map((char, i) => (
