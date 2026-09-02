@@ -15,7 +15,7 @@ const avatars = [
   'https://i.pravatar.cc/150?img=32',
 ];
 
-const TeamSection = () => {
+const TeamSection = ({ roundedTop = false }) => {
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
   const avatarsRef = useRef([]);
@@ -137,9 +137,10 @@ const TeamSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-24 md:py-32"
+      className={`relative w-full py-24 md:py-32 ${roundedTop ? 'rounded-t-[40px] md:rounded-t-[80px]' : ''}`}
       style={{
         background: '#f5f5f5', // Matches previous section perfectly
+        zIndex: roundedTop ? 20 : 1, // ensure it overlaps nicely if needed
       }}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-12">

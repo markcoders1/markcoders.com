@@ -1,6 +1,7 @@
 import PageHero from './landing/PageHero';
 import { FEATURED_PROJECT } from '../data/projects';
 import canvasBg from '../assets/canvasbg.gif';
+import cardImage from '../assets/vantage.webp';
 
 const OurWorkCard = ({ imageRef, tagline, image, title }) => (
   <div
@@ -147,10 +148,10 @@ const ProjectsHero = ({ previewImageRef }) => {
           layout="split"
           spread
           showDot
-          titleSize="210px"
+          titleSize="clamp(64px, 15vw, 210px)"
           className="flex-1"
           titleClassName="!tracking-[-1.4px] my-auto"
-          subtitleClassName="!text-[35px] leading-[1.2] font-[500] tracking-[-1px] text-white/90"
+          subtitleClassName="text-[24px] sm:text-[28px] lg:!text-[35px] leading-[1.2] font-[500] tracking-[-1px] text-white/90"
           subtitleContainerClassName="max-w-xl lg:max-w-2xl"
           subtitleStyle={{
             fontFamily: 'Switzer, sans-serif',
@@ -162,7 +163,7 @@ const ProjectsHero = ({ previewImageRef }) => {
           <OurWorkCard
             imageRef={previewImageRef}
             tagline={featured.tagline}
-            image={featured.image}
+            image={cardImage}
             title={featured.title}
           />
         </PageHero>

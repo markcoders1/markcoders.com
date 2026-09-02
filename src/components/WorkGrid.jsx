@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import heroCardImg from '../assets/vantage.webp';
 import saucedImg from '../assets/sauced.webp';
-import jerseyImg from '../assets/jersey.webp';
+import jerseyImg from '../assets/jersey.jpg';
 import jersey2Img from '../assets/jersey2.webp';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -187,7 +187,7 @@ const WorkGrid = ({ heroImageRef }) => {
       ref={sectionRef}
       id="work-grid"
       className="relative z-20 py-16 px-6 md:px-10 lg:px-16 max-w-[1400px] mx-auto"
-      
+
     >
       {/* 2x2 Feature Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 justify-items-center">

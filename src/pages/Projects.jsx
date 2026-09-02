@@ -30,7 +30,7 @@ function Projects() {
       <main>
         <ProjectsHero previewImageRef={previewImageRef} />
         <ProjectsGrid previewImageRef={previewImageRef} />
-        <TeamSection />
+        <TeamSection roundedTop={true} />
         <WorkAndPlaySection />
         <TrustSection />
         <Footer />
